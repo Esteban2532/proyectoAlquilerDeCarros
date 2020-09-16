@@ -34,7 +34,7 @@
                                     <button class="btn btn-info w-100"><span class="text-white"> Arquilar</span></button>
                                 </div>
                                 <div class="col-6 mt-2">
-                                    <a class="btn btn-success w-100"><i class="fa fa-edit"></i></a>
+                                    <a href="{{ route('vehiculo.edit', ['id' => $vehiculo->id ]) }}" class="btn btn-success w-100"><i class="fa fa-edit"></i></a>
                                 </div>
                                 <div class="col-6 mt-2">
                                     <form method="POST" action="{{ url("vehiculo/eliminar/{$vehiculo->id}") }}">

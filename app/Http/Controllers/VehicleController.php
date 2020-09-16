@@ -72,9 +72,11 @@ class VehicleController extends Controller
      * @param  \App\vehicle  $vehicle
      * @return \Illuminate\Http\Response
      */
-    public function edit(vehicle $vehicle)
+    public function edit($id)
     {
-        //
+        $vehiculo = vehicle::find($id);
+
+        return view('vehiculo.edit', compact('vehiculo'));
     }
 
     /**
@@ -84,9 +86,28 @@ class VehicleController extends Controller
      * @param  \App\vehicle  $vehicle
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, vehicle $vehicle)
+    public function update(Request $request, $id)
     {
-        //
+        $vehiculo = vehicle::find($id);
+
+        $data = $request->validate([
+            'color' =>  'required|string',
+            'anio' =>  'required|numeric',
+            'modelo' => 'required|string',
+            'valor' => 'required|numeric',
+            'disponibilidad' => 'required'
+        ]);
+
+        $vehiculo->color = $data['color'];
+        $vehiculo->anio = $data['anio'];
+        $vehiculo->modelo = $data['modelo'];
+        $vehiculo->valor = $data['valor'];
+        $vehiculo->disponibilidad = $data['disponibilidad'];
+
+        $vehiculo->save();
+
+        return redirect('/');
+
     }
 
     /**

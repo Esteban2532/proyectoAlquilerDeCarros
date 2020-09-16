@@ -19,5 +19,8 @@ Route::get('/', 'VehicleController@index')->name('index');
 
 Route::get('/vehiculo/crear', 'VehicleController@create')->name('vehiculo.crear');
 Route::post('/vehiculo/guardar', 'VehicleController@store')->name('vehiculo.guardar');
+Route::get('vehiculo/edit/{id}', 'VehicleController@edit')->name('vehiculo.edit');
+Route::put('vehiculo/{vehiculo}', 'VehicleController@update')->name('vehiculo.update');
 Route::delete('vehiculo/eliminar/{id}', 'VehicleController@destroy')->name('vehiculo.eliminar');
+
 
