@@ -92,7 +92,7 @@
 
                         <div class="form-group">
                             <label for="total">Valor a Pagar</label>
-                            <input id="total"class="form-control @error('total') is-invalid @enderror " value="0" type="text" name="total" required>
+                            <input id="total"class="form-control @error('total') is-invalid @enderror " value="{{ old('total') }}" type="text" name="total" required>
                             @error('total')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -102,7 +102,10 @@
 
 
                         <div class="form-group">
-                            <input hidden value="{{ $vehiculo->id }}" id="id_vehiculo" class="form-control @error('fecha_salida') is-invalid @enderror " value="{{ old('fecha_salida') }}" type="text" name="id_vehiculo">
+                            <input  hidden value="{{ $vehiculo->valor }}" id="valor" class="form-control" type="text" name="valor">
+                        </div>
+                        <div class="form-group">
+                            <input hidden  value="{{ $vehiculo->id }}" id="id_vehiculo" class="form-control"  type="text" name="id_vehiculo">
                         </div>
                     </fieldset>
 

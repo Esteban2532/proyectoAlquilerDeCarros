@@ -6,99 +6,75 @@ use App\Arquiler;
 use App\Rent;
 use App\vehicle;
 use Illuminate\Http\Request;
+use App\Exports\RentExport;
+use App\RentDetail;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class RentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $data = $request->validate([
             'fecha_salida' =>  'required|date',
-            'fecha_regreso' =>  'required|date|after:fecha_salida',
+            'fecha_regreso' =>  'required|date|after:fecha_salida|',
             'documento' => 'required|numeric',
             'nombre' => 'required|string',
-            'email' => 'required|email|unique:rents',
+            'email' => 'required|email',
             'medio_pago' => 'required:string',
             'total' => 'required|numeric',
+            'valor' => 'required',
 
         ]);
 
+
+        $valor = $data['valor'];
         $arquiler = new Rent($data);
         $arquiler->id_vehiculo = $request->id_vehiculo;
+
         $arquiler->save();
 
-        return redirect('/');
+        $inicial = strtotime($data['fecha_salida']);
+        $fin = strtotime($data['fecha_regreso']);
 
+        for ($i=$inicial; $i <= $fin  ; $i+= 86400) {
+            $detalleAlquiler = new RentDetail();
+            $detalleAlquiler->fechas = date('Y-m-d', $i);
+            $detalleAlquiler->id_rent = $arquiler->id;
+            $detalleAlquiler->valor = $valor;
+            $detalleAlquiler->save();
+        }
+
+        return redirect('/');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Arquiler  $arquiler
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         $vehiculo = vehicle::find($id);
         return view('alquiler.index', compact('vehiculo'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Arquiler  $arquiler
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Arquiler $arquiler)
-    {
-        //
+    public function index(){
+        return view('alquiler.busqueda');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Arquiler  $arquiler
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Arquiler $arquiler)
-    {
-        //
+    public function informe(Request $request){
+
+        $data = $request->validate([
+            'fecha_salida' =>  'required|date',
+            'fecha_regreso' =>  'required|date|after:fecha_salida|',
+        ]);
+
+        $fechaInicio = $data['fecha_salida'];
+        $fechaFin = $data['fecha_regreso'];
+
+
+        return Excel::download(new RentExport($fechaInicio, $fechaFin), 'rents.csv');
+
+
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Arquiler  $arquiler
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Arquiler $arquiler)
-    {
-        //
-    }
 }

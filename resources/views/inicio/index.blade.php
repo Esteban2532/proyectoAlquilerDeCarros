@@ -26,13 +26,12 @@
                     <div class="card-footer">
 
                         @guest
+                        @if($vehiculo->disponibilidad === 1 )
                         <a href="{{ route('rent.show', [ 'id' => $vehiculo->id ])}}" class="btn btn-info w-100"><span class="text-white"> Arquilar</span></a>
+                        @endif
                         @else
                             <div class="container">
                             <div class="row">
-                                <div class="col-12">
-                                    <a href="{{ route('rent.show', [ 'id' => $vehiculo->id ])}}" class="btn btn-info w-100"><span class="text-white"> Arquilar</span></a>
-                                </div>
                                 <div class="col-6 mt-2">
                                     <a href="{{ route('vehiculo.edit', ['id' => $vehiculo->id ]) }}" class="btn btn-success w-100"><i class="fa fa-edit"></i></a>
                                 </div>

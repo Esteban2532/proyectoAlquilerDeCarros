@@ -50,6 +50,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('vehiculo.crear') }}">Nuevo vehiculo</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('alquiler.index') }}">Informe</a>
+                        </li>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -78,7 +83,8 @@
         </main>
     </div>
     @yield('scripts')
-    {{-- <script src="http://momentjs.com/downloads/moment.min.js"></script> --}}
+
+    <script src="{{ asset('js/moment.js') }}" defer></script>
     <script src="{{ asset('js/main.js') }}" defer></script>
 
 </body>

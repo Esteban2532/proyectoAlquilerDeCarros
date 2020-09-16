@@ -24,7 +24,10 @@ Route::put('vehiculo/{vehiculo}', 'VehicleController@update')->name('vehiculo.up
 Route::delete('vehiculo/eliminar/{id}', 'VehicleController@destroy')->name('vehiculo.eliminar');
 
 
+Route::get('alquiler/informe', 'RentController@index')->name('alquiler.index');
 Route::get('alquiler/{id}', 'RentController@show')->name('rent.show');
 Route::post('alquiler', 'RentController@store')->name('rent.store');
+Route::post('alquiler/descarga', 'RentController@informe')->name('rent.informe');
+
 
 

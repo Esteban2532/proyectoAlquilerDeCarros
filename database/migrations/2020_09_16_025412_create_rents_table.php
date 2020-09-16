@@ -19,11 +19,11 @@ class CreateRentsTable extends Migration
             $table->date('fecha_regreso');
             $table->integer('documento');
             $table->string('nombre');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('medio_pago');
             $table->decimal('total', 11, 2);
-
             $table->integer('id_vehiculo')->unsigned();
+
 
             $table->timestamps();
             $table->foreign('id_vehiculo')->references('id')->on('vehicles');
