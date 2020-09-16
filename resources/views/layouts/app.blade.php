@@ -77,5 +77,9 @@
             @yield('content')
         </main>
     </div>
+    @yield('scripts')
+    {{-- <script src="http://momentjs.com/downloads/moment.min.js"></script> --}}
+    <script src="{{ asset('js/main.js') }}" defer></script>
+
 </body>
 </html>

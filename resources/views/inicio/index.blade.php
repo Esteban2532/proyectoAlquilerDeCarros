@@ -26,12 +26,12 @@
                     <div class="card-footer">
 
                         @guest
-                            <button class="btn btn-info w-100"><span class="text-white"> Arquilar</span></button>
+                        <a href="{{ route('rent.show', [ 'id' => $vehiculo->id ])}}" class="btn btn-info w-100"><span class="text-white"> Arquilar</span></a>
                         @else
                             <div class="container">
                             <div class="row">
                                 <div class="col-12">
-                                    <button class="btn btn-info w-100"><span class="text-white"> Arquilar</span></button>
+                                    <a href="{{ route('rent.show', [ 'id' => $vehiculo->id ])}}" class="btn btn-info w-100"><span class="text-white"> Arquilar</span></a>
                                 </div>
                                 <div class="col-6 mt-2">
                                     <a href="{{ route('vehiculo.edit', ['id' => $vehiculo->id ]) }}" class="btn btn-success w-100"><i class="fa fa-edit"></i></a>
@@ -48,7 +48,6 @@
                         @endguest
                     </div>
                 </div>
-
             </div>
             @endforeach
         </div>
