@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\vehicle;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $vehiculos = vehicle::all();
+        dd($vehiculos);
+
+        /* return view('inicio.index', compact('vehiculos')); */
     }
 }

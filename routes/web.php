@@ -13,10 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('inicio/index');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'VehicleController@index')->name('index');
+
+Route::get('/vehiculo/crear', 'VehicleController@create')->name('vehiculo.crear');
+Route::post('/vehiculo/guardar', 'VehicleController@store')->name('vehiculo.guardar');
+Route::delete('vehiculo/eliminar/{id}', 'VehicleController@destroy')->name('vehiculo.eliminar');
+
