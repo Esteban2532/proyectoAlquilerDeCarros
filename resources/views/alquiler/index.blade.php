@@ -32,8 +32,8 @@
                         <div class="form-group">
                             <label for="">Fecha Salida y Regreso</label>
                             <div class="input-group">
-                                <input name="fecha_salida" id="fecha_salida" type="date" required  class="fecha_salida form-control" >
-                                <input name="fecha_regreso" id="fecha_regreso" type="date" required  class="form-control fecha_regreso">
+                                <input name="fecha_salida" id="fecha_salida"  type="date" required  class="fecha_salida @error('fecha_salida') is-invalid @enderror  form-control" >
+                                <input name="fecha_regreso" id="fecha_regreso" type="date" required  class="form-control @error('fecha_regreso') is-invalid @enderror  fecha_regreso">
 
                                 @error('fecha_salida')
                                 <div class="invalid-feedback">

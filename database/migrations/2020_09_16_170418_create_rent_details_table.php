@@ -20,7 +20,9 @@ class CreateRentDetailsTable extends Migration
             $table->integer('id_rent')->unsigned();
             $table->timestamps();
 
-            $table->foreign('id_rent')->references('id')->on('rents');
+            $table->foreign('id_rent')->references('id')->on('rents')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

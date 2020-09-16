@@ -26,7 +26,9 @@ class CreateRentsTable extends Migration
 
 
             $table->timestamps();
-            $table->foreign('id_vehiculo')->references('id')->on('vehicles');
+            $table->foreign('id_vehiculo')->references('id')->on('vehicles')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
